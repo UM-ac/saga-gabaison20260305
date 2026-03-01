@@ -1,0 +1,303 @@
+/* app/page.module.css */
+
+/* 1. 緑の大きな背景（ヒーローセクション） */
+.heroSection {
+  background-color: #00A040;
+  color: white;
+  padding: 80px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 40px 40px;
+}
+
+.heroText {
+  flex: 1;
+}
+
+.heroText h2 {
+  font-size: 42px;
+  margin: 10px 0 20px;
+  line-height: 1.4;
+}
+
+.heroBtn {
+  background-color: white;
+  color: #00A040;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: opacity 0.2s;
+}
+
+.heroBtn:hover {
+  opacity: 0.8;
+}
+
+/* 2. 4つの数字が並ぶセクション */
+.statsSection {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 5%;
+  background-color: #FAFAFA;
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statItem h3 {
+  font-size: 28px;
+  color: #333;
+  margin: 5px 0;
+}
+
+/* 3. 社会課題のカードセクション */
+.issuesSection {
+  padding: 60px 5%;
+  text-align: center;
+}
+
+.issuesCards {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.issueCard {
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  width: 30%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+
+
+/* --- 4. 私たちのソリューション --- */
+.solutionSection {
+  padding: 80px 5%;
+  background-color: #FFFFFF;
+  text-align: center;
+}
+
+.solutionContent {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+.solutionImage {
+  flex: 1;
+}
+
+.solutionImage img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.solutionList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* リストの隙間 */
+}
+
+.solutionItem {
+  display: flex;
+  gap: 16px;
+}
+
+.solutionIcon {
+  background-color: #E6F5EA;
+  color: #00A040;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+/* --- 5. AI搭載レシピ提案 --- */
+.recipeSection {
+  padding: 80px 5%;
+  text-align: center;
+  background-color: #FAFAFA;
+}
+
+.recipeCards {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.recipeCard {
+  background-color: white;
+  border-radius: 16px;
+  width: 30%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+.recipeImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipeInfo {
+  padding: 24px;
+}
+
+.recipeTitle {
+  font-size: 18px;
+  margin: 0 0 10px;
+  font-weight: bold;
+}
+
+.recipeDesc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.recipeMeta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #999;
+}
+
+.recipeBtnWrapper {
+  margin-top: 40px;
+}
+
+.recipeBtn {
+  background-color: #9C27B0; /* Figmaに合わせた紫色 */
+  color: white;
+  padding: 14px 40px;
+  border-radius: 30px;
+  font-weight: bold;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+
+.recipeBtn:hover {
+  opacity: 0.8;
+}
+
+/* --- 6. 今すぐ始めよう（緑のエリア） --- */
+.ctaSection {
+  background-color: #00A040;
+  color: white;
+  text-align: center;
+  padding: 80px 5%;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.btnPrimary {
+  background-color: white;
+  color: #00A040;
+  padding: 14px 40px;
+  border-radius: 30px;
+  font-weight: bold;
+}
+
+.btnOutline {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 12px 40px;
+  border-radius: 30px;
+  font-weight: bold;
+}
+
+
+
+
+/* =========================================
+   📱 スマホ用レスポンシブデザイン (768px以下)
+   ========================================= */
+@media (max-width: 768px) {
+  
+  /* 1. ヒーローセクション（緑の看板） */
+  .heroSection {
+    flex-direction: column; /* 横並びを縦並びに */
+    text-align: center;
+    padding: 40px 5%;
+    border-radius: 0 0 24px 24px; /* 丸みを少し小さく */
+  }
+
+  .heroText h2 {
+    font-size: 28px; /* スマホ用に文字サイズを調整 */
+  }
+
+  /* ヒーロー画像の上の余白 */
+  .heroSection > div:last-child {
+    margin-top: 32px;
+  }
+
+  /* 3. 社会課題のカード */
+  .issuesCards {
+    flex-direction: column; /* 縦に積む */
+    gap: 16px;
+  }
+
+  .issueCard {
+    width: 100%; /* 横幅いっぱいに広げる */
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  /* 4. ソリューション */
+  .solutionContent {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .solutionItem {
+    align-items: flex-start; /* アイコンと文字の上端を揃える */
+  }
+
+  /* 5. レシピのカード */
+  .recipeCards {
+    flex-direction: column;
+  }
+
+  .recipeCard {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 6. CTA（今すぐ始めよう）のボタン */
+  .ctaButtons {
+    flex-direction: column; /* ボタンを縦に並べる */
+    gap: 16px;
+  }
+
+  .btnPrimary, .btnOutline {
+    width: 100%; /* ボタンを横幅いっぱいにして押しやすく */
+    box-sizing: border-box;
+  }
+}

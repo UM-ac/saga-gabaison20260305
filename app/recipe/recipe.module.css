@@ -1,0 +1,322 @@
+/* app/recipe/recipe.module.css */
+
+.container {
+  padding: 40px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.pageTitle {
+  font-size: 32px;
+  color: #333;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pageTitleIcon {
+  color: #9C27B0;
+  font-size: 40px;
+}
+
+.pageSubtitle {
+  color: #666;
+  font-size: 16px;
+}
+
+/* --- 3つの特徴カード --- */
+.features {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.featureCard {
+  flex: 1;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  border-top: 4px solid transparent;
+}
+
+.featureCard:nth-child(1) { border-top-color: #9C27B0; } /* 紫 */
+.featureCard:nth-child(2) { border-top-color: #00A040; } /* 緑 */
+.featureCard:nth-child(3) { border-top-color: #FF9800; } /* オレンジ */
+
+.featureIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.featureCard:nth-child(1) .featureIcon { background-color: #9C27B0; }
+.featureCard:nth-child(2) .featureIcon { background-color: #00A040; }
+.featureCard:nth-child(3) .featureIcon { background-color: #FF9800; }
+
+.featureTitle {
+  font-size: 18px;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.featureDesc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --- 検索バー --- */
+.searchSection {
+  margin-bottom: 40px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 16px 24px;
+  border: 1px solid #EAEAEA;
+  border-radius: 30px;
+  font-size: 16px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* --- AIレシピジェネレーター（紫のエリア） --- */
+.generatorBanner {
+  background: linear-gradient(135deg, #9C27B0, #E91E63); /* 紫からピンクへのグラデーション */
+  border-radius: 16px;
+  padding: 40px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(156, 39, 176, 0.3);
+}
+
+.generatorContent {
+  flex: 2;
+  padding-right: 40px;
+}
+
+.generatorTitle {
+  font-size: 24px;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.generatorDesc {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 24px;
+}
+
+.generatorInputGroup {
+  display: flex;
+  gap: 16px;
+}
+
+.generatorInput {
+  flex: 1;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  color: #333;
+}
+
+.generatorBtn {
+  background-color: white;
+  color: #9C27B0;
+  border: none;
+  padding: 0 32px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.generatorBtn:hover {
+  opacity: 0.9;
+}
+
+.generatorHints {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.generatorHints h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+
+.generatorHints ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* --- レシピ一覧（カードグリッド） --- */
+.resultCount {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.cardImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.badgeAi {
+  background-color: #9C27B0;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.badgeTag {
+  background-color: #00A040;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.cardContent {
+  padding: 16px;
+}
+
+.recipeTitle {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.recipeDesc {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.recipeMeta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #999;
+}
+
+
+/* =========================================
+   📱 スマホ用レスポンシブデザイン (768px以下)
+   ========================================= */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 5%;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .pageTitleIcon {
+    font-size: 32px;
+  }
+
+  /* 3つの特徴カードを縦に並べる */
+  .features {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* AIレシピジェネレーターの紫エリアをスマホ用に最適化 */
+  .generatorBanner {
+    flex-direction: column;
+    padding: 24px 16px;
+    text-align: center;
+  }
+
+  .generatorContent {
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .generatorTitle {
+    justify-content: center; /* アイコンと文字を真ん中に */
+    font-size: 20px;
+  }
+
+  /* 入力欄とボタンを縦並びにし、横幅いっぱいに広げる */
+  .generatorInputGroup {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .generatorInput {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .generatorBtn {
+    width: 100%;
+    padding: 16px; /* スマホでタップしやすいように高さを出す */
+  }
+
+  /* レシピ一覧のカードを確実に1列にする */
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cardImage {
+    height: 200px;
+  }
+}

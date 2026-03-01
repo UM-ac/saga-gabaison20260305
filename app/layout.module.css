@@ -1,0 +1,101 @@
+/* app/layout.module.css */
+
+/* --- ヘッダー --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #EAEAEA;
+}
+
+.headerLogo h1 {
+  margin: 0;
+  font-size: 20px;
+  color: #00A040;
+}
+
+.headerLogo p {
+  margin: 0;
+  font-size: 10px;
+  color: #666;
+}
+
+.headerNav {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  font-weight: bold;
+}
+
+.sellButton {
+  background-color: #E6F5EA;
+  color: #00A040;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #00A040;
+}
+
+/* --- メイン領域 --- */
+.mainContent {
+  min-height: 80vh;
+}
+
+/* --- フッター --- */
+.footer {
+  background-color: #1A2332;
+  color: #FFFFFF;
+  padding: 40px;
+  font-size: 14px;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footerBottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 12px;
+  color: #999;
+}
+
+
+/* =========================================
+   📱 スマホ用レスポンシブデザイン (768px以下)
+   ========================================= */
+@media (max-width: 768px) {
+  /* --- ヘッダーの調整 --- */
+  .header {
+    padding: 12px 5%; /* 左右の余白（40px）を狭くして画面いっぱいに */
+  }
+
+  .headerLogo h1 {
+    font-size: 18px; /* スマホではロゴを少しだけ小さく */
+  }
+
+  .headerNav {
+    gap: 12px; /* メニュー同士の隙間を詰める */
+    font-size: 14px; /* メニューの文字を少し小さく */
+  }
+
+  .sellButton {
+    padding: 6px 12px; /* ボタンを少しコンパクトに */
+    font-size: 12px;
+  }
+
+  /* --- フッターの調整 --- */
+  .footer {
+    padding: 32px 5%;
+  }
+
+  .footerContent {
+    flex-direction: column; /* 横並びのメニューを縦並びに変更 */
+    gap: 24px;
+    text-align: center; /* スマホのフッターは中央揃えが綺麗です */
+  }
+}

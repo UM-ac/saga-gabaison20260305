@@ -1,0 +1,194 @@
+/* app/search/search.module.css */
+
+.container {
+  padding: 40px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pageTitle {
+  font-size: 28px;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.pageSubtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+/* --- 検索フィルター部分 --- */
+.filterSection {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.searchInput,
+.categorySelect {
+  padding: 12px 16px;
+  border: 1px solid #EAEAEA;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.searchInput {
+  flex: 2; /* 検索バーを広めにする */
+}
+
+.categorySelect {
+  flex: 1;
+}
+
+.resultCount {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+/* --- 野菜カードのグリッド（並べ方） --- */
+.grid {
+  display: grid;
+  /* 画面幅に合わせてカードを自動で並べる魔法のコード */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+/* --- 個別のカードデザイン --- */
+.card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  position: relative; /* 割引ラベルを上に乗せるため */
+}
+
+.cardImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.discountBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #FF4B4B; /* 赤色 */
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.cardContent {
+  padding: 16px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.vegetableName {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.category {
+  font-size: 12px;
+  color: #666;
+}
+
+.farmerInfo {
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  display: inline-block;
+  color: #F57C00;
+  border: 1px solid #F57C00;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  margin-bottom: 16px;
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #00A040;
+  margin: 0;
+}
+
+.priceUnit {
+  font-size: 12px;
+  color: #666;
+  font-weight: normal;
+}
+
+.originalPrice {
+  font-size: 12px;
+  color: #999;
+  text-decoration: line-through; /* 取り消し線 */
+  margin: 0 0 4px 0;
+}
+
+.stock {
+  font-size: 12px;
+  color: #666;
+}
+
+/* =========================================
+   📱 スマホ用レスポンシブデザイン (768px以下)
+   ========================================= */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 5%; /* 上下の余白を少し減らして、画面を広く使う */
+  }
+
+  .pageTitle {
+    font-size: 24px; /* タイトルを少し小さめに調整 */
+  }
+
+  /* 1. 検索バーとカテゴリー選択を「縦並び」にする */
+  .filterSection {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* 縦並びにした入力欄を、横幅いっぱい（100%）に広げる */
+  .searchInput,
+  .categorySelect {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 2. 野菜のカードを「確実に1列」にする */
+  .grid {
+    grid-template-columns: 1fr; /* 1列に固定 */
+    gap: 16px; /* カード同士の隙間を少し詰める */
+  }
+
+  /* スマホだとカードが大きくなるので、写真も少し高くして迫力を出す */
+  .cardImage {
+    height: 200px; 
+  }
+}

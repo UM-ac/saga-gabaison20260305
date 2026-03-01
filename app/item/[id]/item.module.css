@@ -1,0 +1,179 @@
+/* app/item/[id]/item.module.css */
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 5%;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #00A040;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.backBtn:hover {
+  text-decoration: underline;
+}
+
+.content {
+  display: flex;
+  gap: 40px;
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    padding: 20px;
+  }
+}
+
+.imageSection {
+  flex: 1;
+}
+
+.mainImage {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.infoSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.title {
+  font-size: 28px;
+  margin: 0;
+  color: #333;
+}
+
+.priceBox {
+  background: #FAFAFA;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #EAEAEA;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 14px;
+  margin: 0 0 8px 0;
+}
+
+.price {
+  font-size: 36px;
+  color: #E53935;
+  font-weight: bold;
+  margin: 0;
+}
+
+.priceUnit {
+  font-size: 16px;
+  color: #666;
+  font-weight: normal;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  color: #333;
+  border-bottom: 2px solid #00A040;
+  padding-bottom: 8px;
+  margin: 24px 0 12px 0;
+  display: inline-block;
+}
+
+.description {
+  line-height: 1.8;
+  color: #444;
+  margin: 0;
+}
+
+.farmerBox {
+  background: #F0F8F2;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.buyBtn {
+  background: #00A040;
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s;
+  margin-top: 20px;
+}
+
+.buyBtn:hover {
+  opacity: 0.9;
+}
+
+
+/* =========================================
+   📱 スマホ用レスポンシブデザイン追加分 (768px以下)
+   ========================================= */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px 5%;
+    margin: 20px auto;
+  }
+
+  /* スマホでは画像の角丸を上部だけにして、画面端まで広げるような見せ方に */
+  .mainImage {
+    border-radius: 12px 12px 0 0;
+  }
+
+  /* タイトルと価格の文字サイズを調整 */
+  .title {
+    font-size: 24px;
+  }
+
+  .priceBox {
+    padding: 16px;
+  }
+
+  .price {
+    font-size: 28px;
+  }
+
+  /* 購入ボタンを下部に固定（スティッキー）にして常に押せるようにする裏技 */
+  .buyBtn {
+    position: sticky;
+    bottom: 16px;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 160, 64, 0.3);
+  }
+}

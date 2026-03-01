@@ -1,0 +1,143 @@
+/* app/admin/admin.module.css */
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 5%;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  font-size: 28px;
+  color: #333;
+  margin: 0;
+}
+
+.dangerBadge {
+  background-color: #E53935;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.tableWrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.table th, .table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #EEE;
+  color: #333;
+}
+
+.table th {
+  background-color: #FAFAFA;
+  color: #666;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover {
+  background-color: #F9F9F9;
+}
+
+.statusBadge {
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.statusPending {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.statusApproved {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.approveBtn {
+  background: #00A040;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  font-size: 14px;
+}
+
+.approveBtn:hover {
+  opacity: 0.9;
+}
+
+.approveBtn:disabled {
+  background: #CCC;
+  cursor: not-allowed;
+}
+
+.itemImage {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
+
+/* =========================================
+   📱 スマホ用レスポンシブデザイン (768px以下)
+   ========================================= */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 5%;
+  }
+
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  /* 表は横スクロールできるようにする（すでに設定済みですが念押し） */
+  .tableWrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  /* 承認ボタンを押しやすく少し大きく */
+  .approveBtn {
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+}
