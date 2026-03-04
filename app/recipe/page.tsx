@@ -1,7 +1,8 @@
 // app/recipe/page.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+// import { toPng } from 'html-to-image'; // ★ 追加：npm install html-to-image が必要
 import Link from 'next/link'; // ★ Linkをインポート
 import styles from "./recipe.module.css";
 import { initialRecipes } from '@/lib/recipes'; // ★ 外部ファイルに分けたレシピデータを読み込む
@@ -25,6 +26,26 @@ type GeneratedRecipe = {
 };
 
 export default function RecipePage() {
+
+  // const recipeRef = useRef<HTMLDivElement>(null);
+
+  // const downloadRecipeImage = async () => {
+  //   if (!recipeRef.current) return;
+  //   try {
+  //     const dataUrl = await toPng(recipeRef.current, { 
+  //       cacheBust: true,
+  //       backgroundColor: '#ffffff', // 背景を白にする
+  //       style: { borderRadius: '16px' } // 保存画像も角丸に
+  //     });
+  //     const link = document.createElement('a');
+  //     link.download = `${generatedRecipe?.title || 'recipe'}.png`;
+  //     link.href = dataUrl;
+  //     link.click();
+  //   } catch (err) {
+  //     console.error('保存に失敗しました', err);
+  //   }
+  // };
+
   const [ingredients, setIngredients] = useState('');
   const [generatedRecipe, setGeneratedRecipe] = useState<GeneratedRecipe | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -77,7 +98,8 @@ export default function RecipePage() {
     recipe.title.includes(recipeSearch) || recipe.mainIngredient.includes(recipeSearch)
   );
 
-  return (
+  return(
+
     <div className={styles.container}>
       <div className={styles.pageHeader}>
         <h2 className={styles.pageTitle}><span className={styles.pageTitleIcon}>✨</span> AI搭載レシピ提案</h2>
@@ -118,6 +140,30 @@ export default function RecipePage() {
       )}
 
       {generatedRecipe && !isGenerating && (
+      //   <>
+      //   {/* 1. 保存ボタン（カードの外側に配置） */}
+      //   <div style={{ textAlign: 'right', marginBottom: '15px' }}>
+      //     <button 
+      //       onClick={downloadRecipeImage}
+      //       className={styles.downloadBtn} // スタイルはCSSか直接指定で
+      //       style={{
+      //         backgroundColor: '#9C27B0',
+      //         color: 'white',
+      //         padding: '10px 20px',
+      //         borderRadius: '30px',
+      //         border: 'none',
+      //         fontWeight: 'bold',
+      //         cursor: 'pointer',
+      //         boxShadow: '0 4px 12px rgba(156, 39, 176, 0.3)'
+      //       }}
+      //     >
+      //       📸 レシピを画像で保存
+      //     </button>
+      //   </div>
+
+      //   <div 
+      // ref={recipeRef} 
+      // style={{ backgroundColor: 'white', padding: '40px', borderRadius: '16px', boxShadow: '0 8px 24px rgba(156, 39, 176, 0.1)', marginBottom: '40px', border: '2px solid #9C27B0' }}>
         <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '16px', boxShadow: '0 8px 24px rgba(156, 39, 176, 0.1)', marginBottom: '40px', border: '2px solid #9C27B0' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: '2px solid #F3E5F5', paddingBottom: '16px', marginBottom: '24px' }}>
             <h3 style={{ color: '#9C27B0', fontSize: '24px', margin: 0 }}>✨ {generatedRecipe.title}</h3>

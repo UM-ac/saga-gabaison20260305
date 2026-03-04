@@ -16,7 +16,7 @@ export default function SellPage() {
   const [experience, setExperience] = useState('');
   const [description, setDescription] = useState('');
   const [phone, setPhone] = useState('');
-
+  const [mailadress, setMailadress] = useState('');
   // --- Step 2: 野菜情報 ---
   const [vegName, setVegName] = useState('');
   const [category, setCategory] = useState('果菜類'); // 初期値
@@ -30,8 +30,8 @@ export default function SellPage() {
 
   // --- 次へ進む処理（保存はまだしない） ---
   const handleNext = () => {
-    if (!farmerName || !location || !phone) {
-      alert("必須項目（農園名、所在地、電話番号）を入力してください！");
+    if (!farmerName || !location || !phone || !mailadress) {
+      alert("必須項目（農園名、所在地、電話番号、メールアドレス）を入力してください！");
       return;
     }
     setStep(2); // Step 2へ切り替え！
@@ -53,6 +53,7 @@ export default function SellPage() {
         farmer: farmerName,
         location: location,
         phone: phone,
+        mailadress: mailadress,
         // 野菜情報
         name: vegName,
         category: category,
@@ -70,7 +71,7 @@ export default function SellPage() {
       
       // 入力欄を空にしてStep1に戻す
       setStep(1);
-      setFarmerName(''); setLocation(''); setExperience(''); setDescription(''); setPhone('');
+      setFarmerName(''); setLocation(''); setExperience(''); setDescription('');  setPhone(''); setMailadress('');
       setVegName(''); setCategory('果菜類'); setPrice(''); setOriginalPrice(''); setQuantity(''); setReason(''); setVegDescription('');
       
     } catch (error) {
@@ -127,6 +128,10 @@ export default function SellPage() {
               <div className={styles.formGroup}>
                 <label className={styles.label}>電話番号 <span className={styles.required}>*</span></label>
                 <input type="tel" className={styles.input} placeholder="例: 090-1234-5678" value={phone} onChange={(e) => setPhone(e.target.value)} />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>メールアドレス <span className={styles.required}>*</span></label>
+                <input type="email" className={styles.input} placeholder="例: example@gmail.com" value={mailadress} onChange={(e) => setMailadress(e.target.value)} />
               </div>
 
               <button type="button" className={styles.submitBtn} onClick={handleNext}>
