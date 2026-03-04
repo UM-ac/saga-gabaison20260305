@@ -66,11 +66,28 @@ export default function SellPage() {
         image: "https://placehold.jp/24/cccccc/ffffff/400x300.png?text=審査中",
         createdAt: serverTimestamp(),
       });
-
+      
+      // --- Resend APIを呼び出してメール送信 ---
+      await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: mailadress,
+          farmerName: farmerName,
+          vegName: vegName,
+          price: price,
+          quantity: quantity,
+        }),
+      });
+      // --- Resend API呼び出し終了 ---
+      
+      setStep(3);
       alert("出品が完了しました！審査結果をお待ちください。");
       
       // 入力欄を空にしてStep1に戻す
-      setStep(1);
+      // setStep(1);
       setFarmerName(''); setLocation(''); setExperience(''); setDescription('');  setPhone(''); setMailadress('');
       setVegName(''); setCategory('果菜類'); setPrice(''); setOriginalPrice(''); setQuantity(''); setReason(''); setVegDescription('');
       
@@ -84,28 +101,40 @@ export default function SellPage() {
 
   return (
     <div className={styles.container}>
+      
+      {/* --- 変更開始：ヘッダーのテキストをステップで出し分け --- */}
       <div className={styles.pageHeader}>
-        <h2 className={styles.pageTitle}>規格外野菜を出品する</h2>
-        <p className={styles.pageSubtitle}>形が不揃いな野菜も、価値を理解してくれる消費者に届けましょう</p>
+        <h2 className={styles.pageTitle}>
+          {step === 3 ? "出品を受け付けました" : "規格外野菜を出品する"}
+        </h2>
+        <p className={styles.pageSubtitle}>
+          {step === 3 ? "ご協力ありがとうございます！" : "形が不揃いな野菜も、価値を理解してくれる消費者に届けましょう"}
+        </p>
       </div>
 
-      {/* ステップバー */}
+      {/* ステップバー：3（出品完了）を追加 */}
       <div className={styles.stepper}>
         <div className={`${styles.step} ${step >= 1 ? styles.stepActive : ''}`}>
           <div className={styles.stepNumber}>1</div>
           <span>農家情報</span>
         </div>
-        {/* Step2の時は緑の線を引く */}
-        <div className={styles.stepLine} style={{ backgroundColor: step === 2 ? '#00A040' : '#EAEAEA' }}></div>
-        <div className={`${styles.step} ${step === 2 ? styles.stepActive : ''}`}>
+        <div className={styles.stepLine} style={{ backgroundColor: step >= 2 ? '#00A040' : '#EAEAEA' }}></div>
+        <div className={`${styles.step} ${step >= 2 ? styles.stepActive : ''}`}>
           <div className={styles.stepNumber}>2</div>
           <span>野菜情報</span>
         </div>
+        {/* 完了ステップへのラインと円を追加 */}
+        <div className={styles.stepLine} style={{ backgroundColor: step === 3 ? '#00A040' : '#EAEAEA' }}></div>
+        <div className={`${styles.step} ${step === 3 ? styles.stepActive : ''}`}>
+          <div className={styles.stepNumber}>3</div>
+          <span>出品完了</span>
+        </div>
       </div>
+      {/* --- 変更終了 --- */}
 
       <div className={styles.formCard}>
-        {/* =========== Step 1 の画面 =========== */}
-        {step === 1 ? (
+        {/* --- 変更開始：条件分岐を整理（step === 1） --- */}
+        {step === 1 && (
           <>
             <h3 className={styles.formTitle}>農家情報の登録</h3>
             <form onSubmit={(e) => e.preventDefault()}>
@@ -139,8 +168,11 @@ export default function SellPage() {
               </button>
             </form>
           </>
-        ) : (
-        /* =========== Step 2 の画面 =========== */
+        )}
+        {/* --- 変更終了 --- */}
+
+        {/* --- 変更開始：条件分岐を整理（step === 2） --- */}
+        {step === 2 && (
           <>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
               <h3 className={styles.formTitle} style={{ margin: 0 }}>野菜情報の登録</h3>
@@ -164,7 +196,6 @@ export default function SellPage() {
                 </select>
               </div>
 
-              {/* 価格は横並びにすると綺麗です */}
               <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
                 <div style={{ flex: 1 }}>
                   <label className={styles.label}>通常価格(円/kg) <span className={styles.required}>*</span></label>
@@ -199,12 +230,10 @@ export default function SellPage() {
                 </div>
               </div>
 
-              {/* 注意書き */}
               <div className={styles.warningText}>
                 ⚠️ 出品後、運営チームによる審査が行われます。審査には1-2営業日かかる場合があります。
               </div>
 
-              {/* 横並びのボタン */}
               <div className={styles.buttonGroup}>
                 <button type="button" className={styles.backBtn} onClick={() => setStep(1)}>戻る</button>
                 <button type="button" className={styles.primaryBtn} onClick={handleSubmit} disabled={isSubmitting}>
@@ -214,6 +243,37 @@ export default function SellPage() {
             </form>
           </>
         )}
+        {/* --- 変更終了 --- */}
+
+        {/* --- 変更開始：Step 3 の完了画面を追加（フォームと同じ場所に表示） --- */}
+        {step === 3 && (
+          <div style={{ textAlign: 'center', padding: '40px 20px' }}>
+            <div style={{ fontSize: '60px', marginBottom: '20px' }}>🎉</div>
+            <h3 className={styles.formTitle}>出品が完了しました！</h3>
+            <p style={{ color: '#666', marginBottom: '32px', lineHeight: '1.6' }}>
+              ありがとうございます！<br />
+              運営チームによる審査の後、ショップに公開されます。<br />
+              審査には1〜2営業日ほどお時間をいただいております。
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <button 
+                type="button" 
+                className={styles.submitBtn} 
+                onClick={() => window.location.href = '/'} 
+              >
+                トップページに戻る
+              </button>
+              <button 
+                type="button" 
+                className={styles.backBtn} 
+                onClick={() => setStep(1)}
+              >
+                続けて別の野菜を出品する
+              </button>
+            </div>
+          </div>
+        )}
+        {/* --- 変更終了 --- */}
       </div>
     </div>
   );
