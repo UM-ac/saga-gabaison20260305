@@ -9,7 +9,7 @@ export const initialRecipes = [
     servings: "2人前", 
     mainIngredient: "トマト", 
     tag: "簡単", 
-    image: "https://placehold.jp/24/ffb6b9/ffffff/400x300.png?text=トマトパスタ",
+    image: "/images/recipe/pasta.png",
     ingredients: ["規格外トマト: 大2〜3個", "パスタ: 200g", "ニンニク: 1片", "オリーブオイル: 大さじ2", "塩こしょう: 少々"],
     steps: [
       "トマトはヘタを取り、ざく切りにする。ニンニクはみじん切りにする。",
@@ -27,7 +27,7 @@ export const initialRecipes = [
     servings: "4人前", 
     mainIngredient: "人参", 
     tag: "簡単", 
-    image: "https://placehold.jp/24/ffdfba/ffffff/400x300.png?text=人参スープ",
+    image: "/images/recipe/soup.png",
     ingredients: ["曲がり人参: 2本", "玉ねぎ: 1/2個", "バター: 10g", "水: 200ml", "牛乳（または豆乳）: 200ml", "コンソメ: 小さじ1"],
     steps: [
       "人参と玉ねぎは薄切りにする（後でミキサーにかけるので形は適当でOK）。",
@@ -45,7 +45,7 @@ export const initialRecipes = [
     servings: "2人前", 
     mainIngredient: "きゅうり", 
     tag: "時短", 
-    image: "https://placehold.jp/24/baffc9/ffffff/400x300.png?text=浅漬け",
+    image: "/images/recipe/pickle.png",
     ingredients: ["曲がりきゅうり: 2本", "塩昆布: 大さじ1", "ごま油: 小さじ1", "すりおろし生姜: 少々", "白ごま: 適量"],
     steps: [
       "きゅうりは麺棒などで軽く叩いてヒビを入れ、手で食べやすい大きさに割る。",
@@ -63,7 +63,7 @@ export const initialRecipes = [
     servings: "2人前", 
     mainIngredient: "ピーマン", 
     tag: "時短", 
-    image: "https://placehold.jp/24/c8e6c9/ffffff/400x300.png?text=無限ピーマン",
+    image: "/images/recipe/pepper.png",
     ingredients: ["規格外ピーマン: 4〜5個", "ツナ缶: 1缶", "鶏ガラスープの素: 小さじ1", "ごま油: 小さじ1", "黒こしょう: 少々"],
     steps: [
       "ピーマンは種を取り、細切りにする。",
@@ -81,7 +81,7 @@ export const initialRecipes = [
     servings: "2〜3人前", 
     mainIngredient: "ナス", 
     tag: "定番", 
-    image: "https://placehold.jp/24/e1bee7/ffffff/400x300.png?text=ナスの揚げ浸し",
+    image: "/images/recipe/eggplant.png",
     ingredients: ["傷ありナス: 3本", "めんつゆ（3倍濃縮）: 大さじ3", "水: 150ml", "おろし生姜: 適量", "揚げ油: 適量"],
     steps: [
       "ナスはヘタを取り、縦半分に切ってから皮目に斜めの切れ目を細かく入れ、さらに半分に切る。",
@@ -99,7 +99,7 @@ export const initialRecipes = [
     servings: "2人前", 
     mainIngredient: "大根", 
     tag: "おつまみ", 
-    image: "https://placehold.jp/24/fff9c4/ffffff/400x300.png?text=フライド大根",
+    image: "/images/recipe/daikon.png",
     ingredients: ["二股や変形大根: 約300g", "醤油: 大さじ1", "鶏ガラスープの素: 小さじ1/2", "にんにくチューブ: 2cm", "片栗粉: 大さじ3", "揚げ油: 適量"],
     steps: [
       "大根は皮を剥き、拍子木切り（フライドポテトのような太めのスティック状）にする。",
@@ -117,7 +117,7 @@ export const initialRecipes = [
     servings: "2人前", 
     mainIngredient: "キャベツ", 
     tag: "時短", 
-    image: "https://placehold.jp/24/b2dfdb/ffffff/400x300.png?text=キャベツ蒸し",
+    image: "/images/recipe/cabbage.png",
     ingredients: ["キャベツ: 1/4個", "塩昆布: 大さじ1", "バター: 10g", "酒: 大さじ1"],
     steps: [
       "キャベツは手で食べやすい大きさにちぎる。（傷んでいる外葉は取り除くか、綺麗な部分だけを使う）",
