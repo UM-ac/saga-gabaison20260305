@@ -7,7 +7,6 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import styles from "./search.module.css";
 import Link from 'next/link';
 
-// データの型（status を追加！）
 type Vegetable = {
   id: string;
   name: string;
@@ -19,19 +18,44 @@ type Vegetable = {
   originalPrice: number;
   stock: string;
   image: string;
-  status?: string; // ★ 「販売中」や「審査中」などの状態を入れる箱
+  status?: string;
 };
+
+// ★ 追加：名前から画像ファイル名を判定する関数
+const getVegetableImage = (name: string, category: string, defaultImage: string) => {
+  const lowerName = name.toLowerCase(); // 小文字に変換して判定しやすくする
+  
+  // 1. 名前に特定のキーワードが含まれているかチェック
+  if (lowerName.includes('トマト')) return '/images/items/tomato.png';
+  if (lowerName.includes('ナス') || lowerName.includes('なす')) return '/images/items/eggplant.png';
+  if (lowerName.includes('ピーマン')) return '/images/items/pepper.png';
+  if (lowerName.includes('キャベツ')) return '/images/items/cabbage.png';
+  if (lowerName.includes('じゃがいも') || lowerName.includes('ポテト')) return '/images/items/potato.png';
+  if (lowerName.includes('人参') || lowerName.includes('にんじん')) return '/images/items/carrot.png';
+  if (lowerName.includes('バナナ')) return '/images/items/banana.png';
+  if (lowerName.includes('ブロッコリー')) return '/images/items/broccoli.png';
+  if (lowerName.includes('玉ねぎ') || lowerName.includes('タマネギ') || lowerName.includes('たまねぎ')) return '/images/items/onion.png';
+  if (lowerName.includes('かぼちゃ') || lowerName.includes('カボチャ')) return '/images/items/pumpkin.png';
+  if (lowerName.includes('大根') || lowerName.includes('だいこん')) return '/images/recipe/daikon.png'; // ※大根はレシピ用の画像を使用
+  if (lowerName.includes('きゅうり') || lowerName.includes('キュウリ')) return '/images/recipe/pickle.png'; // ※きゅうりはレシピ用の画像を使用
+
+  // 2. キーワードに引っかからなかった場合は、カテゴリーで判定
+  if (category === '果菜類') return '/images/items/tomato.png'; // 果菜類の代表としてトマト
+  if (category === '根菜類') return '/images/items/carrot.png'; // 根菜類の代表として人参
+  if (category === '葉菜類') return '/images/items/cabbage.png'; // 葉菜類の代表としてキャベツ
+  
+  return defaultImage; // それでもダメなら元の画像（NoImage）
+};
+
 
 export default function SearchPage() {
   const [vegetables, setVegetables] = useState<Vegetable[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // ★ 検索用の「状態（今何が入力されているか）」を覚えておく変数
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('');
 
-  // ページが開かれた時にFirebaseからデータを取ってくる
   useEffect(() => {
     const fetchVegetables = async () => {
       try {
@@ -54,23 +78,17 @@ export default function SearchPage() {
     fetchVegetables();
   }, []);
 
-  // ★ ここが超重要！「すべての野菜」から「条件に合う野菜」だけをリアルタイムで選び出す魔法
   const filteredVegetables = vegetables.filter((veg) => {
-    // 1. 文字検索（野菜名 or 農家名 or 地域 に文字が含まれているか）
     const matchSearch = searchTerm === '' || 
       veg.name.includes(searchTerm) || 
       veg.farmer.includes(searchTerm) || 
       veg.location.includes(searchTerm);
 
-    // 2. カテゴリー検索
     const matchCategory = selectedCategory === '' || veg.category === selectedCategory;
 
-    // 3. 状態（ステータス）検索
-    // ※過去に出品したデータにはstatusが入っていないので、仮に「審査中」として扱います
     const currentStatus = veg.status || '審査中'; 
     const matchStatus = selectedStatus === '' || currentStatus === selectedStatus;
 
-    // 3つの条件「すべて」をクリアした野菜だけを画面に残す！
     return matchSearch && matchCategory && matchStatus;
   });
 
@@ -81,7 +99,6 @@ export default function SearchPage() {
 
       {/* ===== 検索フィルター ===== */}
       <div className={styles.filterSection}>
-        {/* 文字入力 */}
         <input 
           type="text" 
           placeholder="🔍 野菜名、農家名、地域で検索..." 
@@ -90,7 +107,6 @@ export default function SearchPage() {
           onChange={(e) => setSearchTerm(e.target.value)} 
         />
         
-        {/* カテゴリー選択 */}
         <select 
           className={styles.categorySelect} 
           value={selectedCategory}
@@ -102,7 +118,6 @@ export default function SearchPage() {
           <option value="葉菜類">葉菜類</option>
         </select>
 
-        {/* 状態（ステータス）選択 */}
         <select 
           className={styles.categorySelect} 
           value={selectedStatus}
@@ -113,7 +128,6 @@ export default function SearchPage() {
           <option value="審査中">審査中</option>
         </select>
       </div>
-      {/* ================================================= */}
 
       {isLoading ? (
         <p style={{ textAlign: 'center', padding: '40px', color: '#666' }}>データを読み込み中...</p>
@@ -126,19 +140,25 @@ export default function SearchPage() {
               const discountRate = Math.round((1 - veg.price / veg.originalPrice) * 100);
               const statusLabel = veg.status || '審査中';
 
+              // ★ 魔法の関数を使って画像を決定する
+              let displayImage = veg.image || "https://placehold.jp/24/cccccc/ffffff/400x300.png?text=NoImage";
+              if (statusLabel === '販売中') {
+                displayImage = getVegetableImage(veg.name, veg.category, displayImage);
+              }
+
               return (
                 <Link 
                   href={`/item/${veg.id}`} 
                   key={veg.id} 
                   className={styles.card}
-                  style={{ textDecoration: 'none', color: 'inherit', display: 'block' }} // ★リンクの線を消す
+                  style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
                 >
                   <div className={styles.discountBadge}>{discountRate}% OFF</div>
                   <div style={{ position: 'absolute', top: 12, left: 12, backgroundColor: statusLabel === '販売中' ? '#00A040' : '#FF9800', color: 'white', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold' }}>
                     {statusLabel}
                   </div>
 
-                  <img src={veg.image || "https://placehold.jp/24/cccccc/ffffff/400x300.png?text=NoImage"} alt={veg.name} className={styles.cardImage} />
+                  <img src={displayImage} alt={veg.name} className={styles.cardImage} />
                   
                   <div className={styles.cardContent}>
                     <div className={styles.cardHeader}>

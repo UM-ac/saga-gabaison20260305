@@ -8,7 +8,6 @@ import { doc, getDoc } from 'firebase/firestore';
 import styles from './item.module.css';
 import Link from 'next/link';
 
-// データの型
 type Vegetable = {
   id: string;
   name: string;
@@ -24,9 +23,34 @@ type Vegetable = {
   status?: string;
 };
 
+// ★ こちらにも名前から画像ファイル名を判定する関数を追加
+const getVegetableImage = (name: string, category: string, defaultImage: string) => {
+  const lowerName = name.toLowerCase();
+  
+  if (lowerName.includes('トマト')) return '/images/items/tomato.png';
+  if (lowerName.includes('ナス') || lowerName.includes('なす')) return '/images/items/eggplant.png';
+  if (lowerName.includes('ピーマン')) return '/images/items/pepper.png';
+  if (lowerName.includes('キャベツ')) return '/images/items/cabbage.png';
+  if (lowerName.includes('じゃがいも') || lowerName.includes('ポテト')) return '/images/items/potato.png';
+  if (lowerName.includes('人参') || lowerName.includes('にんじん')) return '/images/items/carrot.png';
+  if (lowerName.includes('バナナ')) return '/images/items/banana.png';
+  if (lowerName.includes('ブロッコリー')) return '/images/items/broccoli.png';
+  if (lowerName.includes('玉ねぎ') || lowerName.includes('タマネギ') || lowerName.includes('たまねぎ')) return '/images/items/onion.png';
+  if (lowerName.includes('かぼちゃ') || lowerName.includes('カボチャ')) return '/images/items/pumpkin.png';
+  if (lowerName.includes('大根') || lowerName.includes('だいこん')) return '/images/recipe/daikon.png';
+  if (lowerName.includes('きゅうり') || lowerName.includes('キュウリ')) return '/images/recipe/pickle.png';
+
+  if (category === '果菜類') return '/images/items/tomato.png';
+  if (category === '根菜類') return '/images/items/carrot.png';
+  if (category === '葉菜類') return '/images/items/cabbage.png';
+  
+  return defaultImage;
+};
+
+
 export default function ItemDetailPage() {
-  const params = useParams(); // URLから[id]の部分を取得する魔法のフック
-  const router = useRouter(); // ページ移動に使うフック
+  const params = useParams(); 
+  const router = useRouter(); 
   
   const [vegetable, setVegetable] = useState<Vegetable | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +59,6 @@ export default function ItemDetailPage() {
     const fetchVegetable = async () => {
       try {
         const id = params.id as string;
-        // 特定のIDのデータだけを狙い撃ちで取得
         const docRef = doc(db, "vegetables", id);
         const docSnap = await getDoc(docRef);
 
@@ -62,6 +85,12 @@ export default function ItemDetailPage() {
   const discountRate = Math.round((1 - vegetable.price / vegetable.originalPrice) * 100);
   const statusLabel = vegetable.status || '審査中';
 
+  // ★ 魔法の関数を使って画像を決定する
+  let displayImage = vegetable.image || "https://placehold.jp/24/cccccc/ffffff/800x600.png?text=NoImage";
+  if (statusLabel === '販売中') {
+    displayImage = getVegetableImage(vegetable.name, vegetable.category, displayImage);
+  }
+
   return (
     <div className={styles.container}>
       <button className={styles.backBtn} onClick={() => router.back()}>
@@ -69,16 +98,14 @@ export default function ItemDetailPage() {
       </button>
 
       <div className={styles.content}>
-        {/* 左側：画像 */}
         <div className={styles.imageSection}>
           <img 
-            src={vegetable.image || "https://placehold.jp/24/cccccc/ffffff/800x600.png?text=NoImage"} 
+            src={displayImage} 
             alt={vegetable.name} 
             className={styles.mainImage} 
           />
         </div>
 
-        {/* 右側：詳細情報 */}
         <div className={styles.infoSection}>
           <div className={styles.badges}>
             <span className={styles.badge} style={{ backgroundColor: '#E53935' }}>{discountRate}% OFF</span>
@@ -112,7 +139,6 @@ export default function ItemDetailPage() {
             <p style={{ margin: 0, color: '#666', fontSize: '14px' }}>📍 所在地: {vegetable.location}</p>
           </div>
 
-{/* button を Link に変えて href を指定！ ※Linkのインポートを忘れずに！ */}
           <Link href={`/checkout/${vegetable.id}`} style={{ textDecoration: 'none' }}>
             <button className={styles.buyBtn}>
               購入手続きへ進む
