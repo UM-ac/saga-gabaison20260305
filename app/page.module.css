@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 0 0 40px 40px;
+  /* border-radiusを削除してまっすぐにしました */
 }
 
 .heroText {
@@ -37,25 +37,7 @@
   opacity: 0.8;
 }
 
-/* 2. 4つの数字が並ぶセクション */
-.statsSection {
-  display: flex;
-  justify-content: space-around;
-  padding: 50px 5%;
-  background-color: #FAFAFA;
-}
-
-.statItem {
-  text-align: center;
-}
-
-.statItem h3 {
-  font-size: 28px;
-  color: #333;
-  margin: 5px 0;
-}
-
-/* 3. 社会課題のカードセクション */
+/* 2. 社会課題のカードセクション */
 .issuesSection {
   padding: 60px 5%;
   text-align: center;
@@ -77,9 +59,7 @@
   text-align: left;
 }
 
-
-
-/* --- 4. 私たちのソリューション --- */
+/* --- 3. 私たちのソリューション --- */
 .solutionSection {
   padding: 80px 5%;
   background-color: #FFFFFF;
@@ -130,7 +110,7 @@
   flex-shrink: 0;
 }
 
-/* --- 5. AI搭載レシピ提案 --- */
+/* --- 4. AI搭載レシピ提案 --- */
 .recipeSection {
   padding: 80px 5%;
   text-align: center;
@@ -201,7 +181,7 @@
   opacity: 0.8;
 }
 
-/* --- 6. 今すぐ始めよう（緑のエリア） --- */
+/* --- 5. 今すぐ始めよう（緑のエリア） --- */
 .ctaSection {
   background-color: #00A040;
   color: white;
@@ -233,9 +213,6 @@
   font-weight: bold;
 }
 
-
-
-
 /* =========================================
    📱 スマホ用レスポンシブデザイン (768px以下)
    ========================================= */
@@ -243,44 +220,43 @@
   
   /* 1. ヒーローセクション（緑の看板） */
   .heroSection {
-    flex-direction: column; /* 横並びを縦並びに */
+    flex-direction: column;
     text-align: center;
     padding: 40px 5%;
-    border-radius: 0 0 24px 24px; /* 丸みを少し小さく */
+    /* スマホ側の border-radius も削除しました */
   }
 
   .heroText h2 {
-    font-size: 28px; /* スマホ用に文字サイズを調整 */
+    font-size: 28px;
   }
 
-  /* ヒーロー画像の上の余白 */
   .heroSection > div:last-child {
     margin-top: 32px;
   }
 
-  /* 3. 社会課題のカード */
+  /* 2. 社会課題のカード */
   .issuesCards {
-    flex-direction: column; /* 縦に積む */
+    flex-direction: column;
     gap: 16px;
   }
 
   .issueCard {
-    width: 100%; /* 横幅いっぱいに広げる */
+    width: 100%;
     padding: 24px;
     box-sizing: border-box;
   }
 
-  /* 4. ソリューション */
+  /* 3. ソリューション */
   .solutionContent {
     flex-direction: column;
     gap: 32px;
   }
 
   .solutionItem {
-    align-items: flex-start; /* アイコンと文字の上端を揃える */
+    align-items: flex-start;
   }
 
-  /* 5. レシピのカード */
+  /* 4. レシピのカード */
   .recipeCards {
     flex-direction: column;
   }
@@ -290,14 +266,14 @@
     box-sizing: border-box;
   }
 
-  /* 6. CTA（今すぐ始めよう）のボタン */
+  /* 5. CTAのボタン */
   .ctaButtons {
-    flex-direction: column; /* ボタンを縦に並べる */
+    flex-direction: column;
     gap: 16px;
   }
 
   .btnPrimary, .btnOutline {
-    width: 100%; /* ボタンを横幅いっぱいにして押しやすく */
+    width: 100%;
     box-sizing: border-box;
   }
 }
