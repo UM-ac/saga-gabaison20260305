@@ -11,9 +11,35 @@ import styles from './checkout.module.css';
 type Vegetable = {
   id: string;
   name: string;
+  category: string;
   price: number;
   farmer: string;
   image: string;
+  status?: string;
+};
+
+// ★ 購入画面にも魔法の関数を追加して画像を綺麗に！
+const getVegetableImage = (name: string, category: string, defaultImage: string) => {
+  const lowerName = name.toLowerCase();
+  
+  if (lowerName.includes('トマト')) return '/images/items/tomato.png';
+  if (lowerName.includes('ナス') || lowerName.includes('なす')) return '/images/items/eggplant.png';
+  if (lowerName.includes('ピーマン')) return '/images/items/pepper.png';
+  if (lowerName.includes('キャベツ')) return '/images/items/cabbage.png';
+  if (lowerName.includes('じゃがいも') || lowerName.includes('ポテト')) return '/images/items/potato.png';
+  if (lowerName.includes('人参') || lowerName.includes('にんじん')) return '/images/items/carrot.png';
+  if (lowerName.includes('バナナ')) return '/images/items/banana.png';
+  if (lowerName.includes('ブロッコリー')) return '/images/items/broccoli.png';
+  if (lowerName.includes('玉ねぎ') || lowerName.includes('タマネギ') || lowerName.includes('たまねぎ')) return '/images/items/onion.png';
+  if (lowerName.includes('かぼちゃ') || lowerName.includes('カボチャ')) return '/images/items/pumpkin.png';
+  if (lowerName.includes('大根') || lowerName.includes('だいこん')) return '/images/recipe/daikon.png';
+  if (lowerName.includes('きゅうり') || lowerName.includes('キュウリ')) return '/images/recipe/pickle.png';
+
+  if (category === '果菜類') return 'https://placehold.jp/e53935/ffffff/400x600.png?text=果菜類';
+  if (category === '根菜類') return 'https://placehold.jp/f57c00/ffffff/400x600.png?text=根菜類';
+  if (category === '葉菜類') return 'https://placehold.jp/43a047/ffffff/400x600.png?text=葉菜類';
+  
+  return defaultImage;
 };
 
 export default function CheckoutPage() {
@@ -22,7 +48,6 @@ export default function CheckoutPage() {
   
   const [vegetable, setVegetable] = useState<Vegetable | null>(null);
   
-  // フォームの入力項目
   const [buyerName, setBuyerName] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [address, setAddress] = useState('');
@@ -31,7 +56,6 @@ export default function CheckoutPage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // ページが開かれたら、買う予定の野菜データを取ってくる
   useEffect(() => {
     const fetchVegetable = async () => {
       if (params.id) {
@@ -45,7 +69,6 @@ export default function CheckoutPage() {
     fetchVegetable();
   }, [params.id]);
 
-  // 注文を確定する処理
   const handleOrder = async () => {
     if (!buyerName || !postalCode || !address || !phone) {
       alert("必須項目をすべて入力してください！");
@@ -55,7 +78,6 @@ export default function CheckoutPage() {
     setIsSubmitting(true);
 
     try {
-      // Firebaseの「orders（注文一覧）」コレクションに保存
       await addDoc(collection(db, "orders"), {
         itemId: vegetable?.id,
         itemName: vegetable?.name,
@@ -66,13 +88,11 @@ export default function CheckoutPage() {
         address,
         phone,
         paymentMethod,
-        status: '注文受付完了', // 今後の管理用
+        status: '注文受付完了',
         orderedAt: serverTimestamp(),
       });
 
       alert("🎉 ご注文ありがとうございます！\n農家さんからの発送をお待ちください。");
-      
-      // 買い物が終わったらトップページに戻す
       router.push('/');
       
     } catch (error) {
@@ -84,6 +104,13 @@ export default function CheckoutPage() {
   };
 
   if (!vegetable) return <div style={{ textAlign: 'center', padding: '100px' }}>読み込み中...</div>;
+
+  // ★ 画像を決定
+  const statusLabel = vegetable.status || '審査中';
+  let displayImage = vegetable.image || "https://placehold.jp/150x150.png";
+  if (statusLabel === '販売中') {
+    displayImage = getVegetableImage(vegetable.name, vegetable.category || '', displayImage);
+  }
 
   return (
     <div className={styles.container}>
@@ -133,7 +160,8 @@ export default function CheckoutPage() {
           <h3 className={styles.summaryTitle}>🛒 ご注文内容</h3>
           
           <div className={styles.itemInfo}>
-            <img src={vegetable.image || "https://placehold.jp/150x150.png"} alt={vegetable.name} className={styles.itemImage} />
+            {/* ★ 魔法の関数で決めた画像を表示 */}
+            <img src={displayImage} alt={vegetable.name} className={styles.itemImage} />
             <div>
               <p className={styles.itemName}>{vegetable.name}</p>
               <p style={{ fontSize: '14px', color: '#666', margin: 0 }}>販売: {vegetable.farmer}</p>

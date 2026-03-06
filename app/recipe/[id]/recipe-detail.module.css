@@ -1,321 +1,161 @@
 /* app/recipe/[id]/recipe-detail.module.css */
-
 .container {
-
   max-width: 900px;
-
   margin: 40px auto;
-
   padding: 0 5%;
-
 }
-
-
 
 .backBtn {
-
   background: none;
-
   border: none;
-
   color: #9C27B0;
-
   font-size: 16px;
-
   font-weight: bold;
-
   cursor: pointer;
-
   margin-bottom: 24px;
-
   display: inline-flex;
-
   align-items: center;
-
 }
-
-
 
 .backBtn:hover {
-
   text-decoration: underline;
-
 }
-
-
 
 .heroSection {
-
   display: flex;
-
   gap: 40px;
-
   margin-bottom: 40px;
-
   align-items: center; /* ★ 追加：画像と文字を縦の中央で綺麗に揃える */
-
 }
-
-
 
 /* ★ 追加：画像を囲む箱のルール */
-
 .imageWrapper {
-
   flex: 1;
-
   min-width: 0; /* ★ 魔法のコード：これが無いと画像が大きすぎて隣を潰す */
-
 }
-
-
 
 .image {
-
   width: 100%;
-
   height: auto;
-
   aspect-ratio: 4/3;
-
   object-fit: cover;
-
   border-radius: 16px;
-
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-
   display: block; /* ★ 追加：画像の下に変な隙間ができるのを防ぐ */
-
 }
-
-
 
 .headerInfo {
-
   flex: 1;
-
   min-width: 0; /* ★ 魔法のコード：文字が縦１列に潰れるのを防ぐ */
-
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
-
 }
-
-
 
 .title {
-
   font-size: 32px;
-
   color: #333;
-
   margin: 0 0 16px 0;
-
   line-height: 1.4;
-
 }
-
-
 
 .desc {
-
   color: #666;
-
   font-size: 16px;
-
   line-height: 1.6;
-
   margin-bottom: 24px;
-
 }
-
-
 
 .metaTags {
-
   display: flex;
-
   gap: 16px;
-
   flex-wrap: wrap; /* ★ 追加：タグが多い時に折り返すようにする */
-
 }
-
-
 
 .tag {
-
   background: #F3E5F5;
-
   color: #9C27B0;
-
   padding: 8px 16px;
-
   border-radius: 20px;
-
   font-weight: bold;
-
   font-size: 14px;
-
 }
-
-
 
 .contentSection {
-
   display: flex;
-
   gap: 40px;
-
   background: white;
-
   padding: 40px;
-
   border-radius: 16px;
-
   box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-
   border-top: 4px solid #9C27B0;
-
 }
-
-
 
 .ingredients, .steps {
-
   flex: 1;
-
 }
-
-
 
 .sectionTitle {
-
   font-size: 22px;
-
   color: #333;
-
   margin: 0 0 20px 0;
-
   display: flex;
-
   align-items: center;
-
   gap: 8px;
-
 }
-
-
 
 .list {
-
   padding-left: 20px;
-
   line-height: 2;
-
   color: #444;
-
   font-size: 16px;
-
 }
-
-
 
 .pointBox {
-
   margin-top: 32px;
-
   background: #FFF8E1;
-
   padding: 24px;
-
   border-radius: 12px;
-
   border-left: 4px solid #FFB300;
-
 }
-
-
 
 .pointTitle {
-
   color: #F57F17;
-
   margin: 0 0 8px 0;
-
   font-size: 16px;
-
 }
 
-
-
 /* =========================================
-
    📱 スマホ用レスポンシブデザイン (768px以下)
-
    ========================================= */
-
 @media (max-width: 768px) {
-
   .container {
-
     padding: 24px 5%;
-
     margin: 20px auto;
-
   }
-
-
 
   /* スマホの時は縦並びにする */
-
   .heroSection {
-
     flex-direction: column;
-
     gap: 24px;
-
   }
-
-
 
   .title {
-
     font-size: 24px;
-
   }
-
-
 
   .contentSection {
-
     flex-direction: column;
-
     padding: 24px 16px;
-
     gap: 32px;
-
   }
-
-
 
   .sectionTitle {
-
     font-size: 20px;
-
   }
-
-
 
   .pointBox {
-
     padding: 16px;
-
     margin-top: 24px;
-
   }
-
 }

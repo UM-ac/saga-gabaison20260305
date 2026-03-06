@@ -18,12 +18,6 @@
   align-items: flex-start;
 }
 
-@media (max-width: 768px) {
-  .checkoutLayout {
-    flex-direction: column-reverse;
-  }
-}
-
 /* 左側：入力フォーム */
 .formSection {
   flex: 2;
@@ -141,18 +135,27 @@
     margin-bottom: 24px;
   }
 
-  /* 入力フォームのカードの余白を減らして画面を広く */
+  /* ★変更：column-reverseをやめて、上から自然な順番に！ */
+  .checkoutLayout {
+    flex-direction: column; 
+    gap: 24px;
+  }
+
+  /* ★追加：スマホの時は画面固定(sticky)を解除してスクロールできるようにする！ */
+  .summarySection {
+    position: static;
+  }
+
   .formSection {
     padding: 24px 16px;
   }
 
-  /* スマホだと入力欄が少し大きめの方がタップしやすい */
   .input, .select {
     padding: 16px 12px;
     font-size: 16px; 
   }
 
   .submitBtn {
-    padding: 20px; /* 注文ボタンは特に大きく！ */
+    padding: 20px; 
   }
 }
